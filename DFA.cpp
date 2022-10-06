@@ -34,7 +34,7 @@ DFA::FIR DFA::designBP(const Vector& weightFunction, const unsigned int filterLe
 {
   if (!(0 <= cutoff1 && cutoff1 <= 1 && cutoff1 < cutoff2 && cutoff2 <= 1))
   {
-    std::cerr << "Invalid cutoff frequencies: please assure that 0 <= cutoff1 < cutoff2 <= PI" << std::endl;
+    std::cerr << "Invalid cutoff frequencies: please assure that 0 <= cutoff1 < cutoff2 <= 1" << std::endl;
     return FIR{ Vector::Zero(0), VectorC::Zero(0) };
   }
 
@@ -166,7 +166,7 @@ DFA::FIR DFA::designLP(const Vector& weightFunction, const unsigned filterLength
 
 DFA::FIR DFA::designHP(const Vector& weightFunction, const unsigned filterLength, const ScalarType cutoff, const int lag, const ScalarType lambda, const ScalarType eta, const bool i1, const bool i2)
 {
-  return designBP(weightFunction, filterLength, cutoff, PI, lag, lambda, eta, i1, i2);
+  return designBP(weightFunction, filterLength, cutoff, 1, lag, lambda, eta, i1, i2);
 }
 
 void DFA::ft(const Vector& in, VectorC& out)
